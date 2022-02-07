@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 
 export default function BookCard() {
   return (
-    <Card sx={{ maxWidth: 280 }}>
+    <Card sx={{ maxWidth: 280, minWidth: 150 }}>
       <CardMedia
         component="img"
         alt="green iguana"

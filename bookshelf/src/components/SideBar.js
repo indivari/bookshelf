@@ -17,7 +17,7 @@ function Sidebar() {
   return (
     <div>
       <SearchBar />
-      <Box sx={{ p: 1, flexGrow: 1 }}>
+      <Box sx={{ p: 1, flexGrow: 1, minWidth: 400 }}>
         <Grid container spacing={1}>
           <Grid item xs={2} md={4}>
             <BookCard />
