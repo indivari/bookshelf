@@ -50,6 +50,5 @@ export default function App() {
         </Grid>
       </Box>
     </div>
->>>>>>> fee7e98 (updated wireframe)
   );
 }
