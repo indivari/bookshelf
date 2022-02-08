@@ -64,7 +64,7 @@ export default function ButtonAppBar() {
                 backgroundColor: "white",
                 padding: 1,
                 fontWeight: "bolder",
-                borderRadius: 3,
+                borderRadius: 2,
                 boxShadow: 3,
               }}
             >

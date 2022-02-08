@@ -11,6 +11,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import { Button } from "@mui/material";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
+import DonateBookModal from "./DonateBookModal";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -84,14 +85,20 @@ export default function SearchBar() {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
+          <Button
+            endIcon={<SearchIcon />}
+            style={{
+              background: "#ffa722",
+              color: "white",
+              margin: 8,
+              fontSize: 9,
+            }}
+          >
+            Search
+          </Button>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Button
-              endIcon={<BookmarkAddIcon />}
-              style={{ background: "#ffa722", color: "white", margin: 8 }}
-            >
-              Donate
-            </Button>
+            <DonateBookModal />
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}></Box>
         </Toolbar>
