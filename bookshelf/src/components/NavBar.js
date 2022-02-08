@@ -9,8 +9,15 @@ import Logout from "@mui/icons-material/Logout";
 import RegIcon from "@mui/icons-material/HowToReg";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import LoginForm from "./LoginForm";
+import SignupModal from "./SignupModal";
 
 export default function ButtonAppBar() {
+  // const [isUserLoggedIn, setIsUserLoggedIn] = false;
+
+  // const handleOnClick = () => {
+  //   setIsUserLoggedIn(true);
+  // };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{ background: "#f1f5ff" }}>
@@ -23,6 +30,7 @@ export default function ButtonAppBar() {
           <LoginForm />
 
           <Button
+            // onClick={handleOnClick}
             endIcon={<Login />}
             style={{ background: "#ffa722", color: "white", margin: 8 }}
           >
@@ -36,12 +44,8 @@ export default function ButtonAppBar() {
             Logout
           </Button>
 
-          <Button
-            endIcon={<RegIcon />}
-            style={{ background: "#ffa722", color: "white", margin: 8 }}
-          >
-            Sign up
-          </Button>
+          <SignupModal />
+
           <Button
             endIcon={<LocalLibraryIcon />}
             style={{ background: "#ffa722", color: "white", margin: 8 }}

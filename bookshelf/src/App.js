@@ -19,12 +19,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 export default function App() {
   return (
-<<<<<<< HEAD
-    <>
-      <div className="App"></div>
-      <GoogleMapsComponent />
-    </>
-=======
     <div className="App">
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
@@ -49,6 +43,5 @@ export default function App() {
         </Grid>
       </Box>
     </div>
->>>>>>> ab0956f4a3234f42c1566b50eb73dbcee29dee04
   );
 }
