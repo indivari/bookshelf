@@ -11,6 +11,7 @@ class MongoDB {
 
   //connect to MongoDB Atlas Instance
   async connect() {
+    console.log(this.uri);
     //make async call with arrow fucntion format.
     await mongoose.connect(this.uri, { useNewUrlParser: true, useUnifiedTopology: true }).then((MongooseNode) => {
       const nativeConnection = MongooseNode.connections[0];

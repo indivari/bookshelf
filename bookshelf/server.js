@@ -14,10 +14,6 @@ const usersRouter = require("./routes/users");
 //create the express app object
 const app = express();
 
-//setup views engine
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
-
 //postgres database
 // const { Pool, Client } = require("pg");
 // const pool = new Pool({
@@ -59,7 +55,7 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-//export so the app can be used anywhere with a require
+//export so the app can be used anywhere with a require.
 module.exports = {
   app,
   mongo,
