@@ -3,9 +3,9 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import RegIcon from "@mui/icons-material/HowToReg";
+
 import FormControl from "@mui/material/FormControl";
-// import OutlinedInput from "@mui/material/OutlinedInput";
+
 import TextField from "@mui/material/TextField";
 
 const style = {
@@ -14,31 +14,40 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
+  height: 400,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
 
+// booke title with author: https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyDmkfSjnnPP6Zl7m0MkrTDQZEjOP0g8y4A
+//book title only search : https://www.googleapis.com/books/v1/volumes?q=flowers&key=AIzaSyDmkfSjnnPP6Zl7m0MkrTDQZEjOP0g8y4A
+
 export default function SignupModal() {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    fetch(
+      "https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyDmkfSjnnPP6Zl7m0MkrTDQZEjOP0g8y4A"
+    )
+      .then((res) => res.json())
+      .then((res) => console.log(res.items[0]));
+
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
 
   return (
     <div>
-      <Button
-        endIcon={<RegIcon />}
-        style={{ background: "#ffa722", color: "white", margin: 8 }}
-        onClick={handleOpen}
-      >
-        Sign up
+      <Button size="small" onClick={handleOpen}>
+        Detail
       </Button>
       <Modal open={open} onClose={handleClose} width="400px">
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Please Fill in the Form
+            Book Details
           </Typography>
+
           <Box component="form" noValidate autoComplete="off">
             <FormControl
               sx={{
@@ -49,30 +58,39 @@ export default function SignupModal() {
               }}
             >
               <TextField
-                id="outlined-input-name"
-                label="Name"
-                defaultValue=""
-                InputProps={{}}
+                id="outlined-read-only-input"
+                label="Book Title"
+                defaultValue="Book title"
+                InputProps={{
+                  readOnly: true,
+                }}
               />
               <TextField
-                id="outlined-input-email"
-                label="Email"
-                defaultValue=""
-                InputProps={{}}
+                id="outlined-read-only-input"
+                label="Author"
+                defaultValue="James"
+                InputProps={{
+                  readOnly: true,
+                }}
               />
               <TextField
-                id="outlined-input-password"
-                label="Password"
-                defaultValue=""
-                InputProps={{}}
-                type="password"
+                id="outlined-read-only-input"
+                label="availability"
+                defaultValue="in stock"
+                InputProps={{
+                  readOnly: true,
+                }}
               />
+
+              {/* <OutlinedInput placeholder="Email" />
+              <OutlinedInput placeholder="Password" /> */}
 
               <Button
                 variant="contained"
                 style={{ background: "#ffa722", color: "white" }}
               >
-                SignUp
+                {" "}
+                Borrow{" "}
               </Button>
             </FormControl>
           </Box>

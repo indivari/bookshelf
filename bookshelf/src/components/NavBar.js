@@ -6,10 +6,9 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Login from "@mui/icons-material/Login";
 import Logout from "@mui/icons-material/Logout";
-import RegIcon from "@mui/icons-material/HowToReg";
-import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import LoginForm from "./LoginForm";
 import SignupModal from "./SignupModal";
+import AccountModal from "./AccountModal";
 
 export default function ButtonAppBar() {
   const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(false);
@@ -31,13 +30,13 @@ export default function ButtonAppBar() {
             <img src="./title.svg" alt="" />
           </Typography>
 
-          <LoginForm />
+          {isUserLoggedIn ? <></> : <LoginForm />}
 
           {isUserLoggedIn ? (
             <Button
               onClick={handleLogoutClick}
               endIcon={<Logout />}
-              style={{ background: "#ffa722", color: "white", margin: 8 }}
+              style={{ background: "#ffa722", color: "white", marginRight: 30 }}
             >
               Logout
             </Button>
@@ -45,27 +44,35 @@ export default function ButtonAppBar() {
             <Button
               onClick={handleLoginClick}
               endIcon={<Login />}
-              style={{ background: "#ffa722", color: "white", margin: 8 }}
+              style={{ background: "#ffa722", color: "white", marginRight: 20 }}
             >
               Login
             </Button>
           )}
 
-          <SignupModal />
+          {isUserLoggedIn ? <></> : <SignupModal />}
 
-          <Button
-            endIcon={<LocalLibraryIcon />}
-            style={{ background: "#ffa722", color: "white", margin: 8 }}
-          >
-            Account
-          </Button>
-          <Typography
-            variant="h6"
-            component="p"
-            sx={{ flexGrow: 0, color: "black", marginLeft: 5 }}
-          >
-            Welcome User1
-          </Typography>
+          {isUserLoggedIn ? <AccountModal /> : <></>}
+          {isUserLoggedIn ? (
+            <Typography
+              variant="h7"
+              component="p"
+              sx={{
+                flexGrow: 0,
+                color: "#ffa722",
+                marginLeft: 5,
+                backgroundColor: "white",
+                padding: 1,
+                fontWeight: "bolder",
+                borderRadius: 3,
+                boxShadow: 3,
+              }}
+            >
+              Welcome User1
+            </Typography>
+          ) : (
+            <></>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
