@@ -12,11 +12,15 @@ import LoginForm from "./LoginForm";
 import SignupModal from "./SignupModal";
 
 export default function ButtonAppBar() {
-  // const [isUserLoggedIn, setIsUserLoggedIn] = false;
+  const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(false);
 
-  // const handleOnClick = () => {
-  //   setIsUserLoggedIn(true);
-  // };
+  const handleLoginClick = () => {
+    setIsUserLoggedIn(true);
+  };
+
+  const handleLogoutClick = () => {
+    setIsUserLoggedIn(false);
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -29,20 +33,23 @@ export default function ButtonAppBar() {
 
           <LoginForm />
 
-          <Button
-            // onClick={handleOnClick}
-            endIcon={<Login />}
-            style={{ background: "#ffa722", color: "white", margin: 8 }}
-          >
-            Login
-          </Button>
-
-          <Button
-            endIcon={<Logout />}
-            style={{ background: "#ffa722", color: "white", margin: 8 }}
-          >
-            Logout
-          </Button>
+          {isUserLoggedIn ? (
+            <Button
+              onClick={handleLogoutClick}
+              endIcon={<Logout />}
+              style={{ background: "#ffa722", color: "white", margin: 8 }}
+            >
+              Logout
+            </Button>
+          ) : (
+            <Button
+              onClick={handleLoginClick}
+              endIcon={<Login />}
+              style={{ background: "#ffa722", color: "white", margin: 8 }}
+            >
+              Login
+            </Button>
+          )}
 
           <SignupModal />
 
