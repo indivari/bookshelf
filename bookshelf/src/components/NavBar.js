@@ -7,6 +7,8 @@ import Button from "@mui/material/Button";
 import Login from "@mui/icons-material/Login";
 import Logout from "@mui/icons-material/Logout";
 import RegIcon from "@mui/icons-material/HowToReg";
+import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
+import LoginForm from "./LoginForm";
 
 export default function ButtonAppBar() {
   return (
@@ -17,6 +19,9 @@ export default function ButtonAppBar() {
             <img src="./logo.svg" alt="" />
             <img src="./title.svg" alt="" />
           </Typography>
+
+          <LoginForm />
+
           <Button
             endIcon={<Login />}
             style={{ background: "#ffa722", color: "white", margin: 8 }}
@@ -36,6 +41,12 @@ export default function ButtonAppBar() {
             style={{ background: "#ffa722", color: "white", margin: 8 }}
           >
             Sign up
+          </Button>
+          <Button
+            endIcon={<LocalLibraryIcon />}
+            style={{ background: "#ffa722", color: "white", margin: 8 }}
+          >
+            Account
           </Button>
           <Typography
             variant="h6"
