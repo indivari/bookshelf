@@ -1,8 +1,8 @@
 const mongoose = require("mongoose"),
   Admin = mongoose.mongo.Admin;
-const { Schema } = mongoose;
+const setupUserSchema = require("./user.schema");
+const userModel = require("../model/users");
 
-const testDoc = {};
 //mongoDB Class
 class MongoDB {
   constructor() {
@@ -16,10 +16,12 @@ class MongoDB {
       const nativeConnection = MongooseNode.connections[0];
       // connection established - use the Admin object grabbed above in the require
       new Admin(nativeConnection.db).listDatabases((err, result) => {
-        console.log(result.databases);
+        console.log("Successfully Connected to MongDB - bookshelf");
       });
     });
   }
 }
+
+setupUserSchema.initialiseUserSchema();
 
 module.exports = MongoDB;
