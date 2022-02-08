@@ -6,7 +6,7 @@ const userModel = require("../model/users");
 //mongoDB Class
 class MongoDB {
   constructor() {
-    this.uri = `mongodb+srv://assemblr_dev:${process.env.MONGOPWD1}@bookshelf.rmtrd.mongodb.net/bookshelf?retryWrites=true&w=majority`;
+    this.uri = `mongodb+srv://${process.env.BOOKSHELF_UID}:${process.env.BOOKSHELF_PWD}@bookshelf.rmtrd.mongodb.net/bookshelf?retryWrites=true&w=majority`;
   }
 
   //connect to MongoDB Atlas Instance
