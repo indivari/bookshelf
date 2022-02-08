@@ -9,15 +9,15 @@ import BookCardDetailModal from "./BookCardDetailModal";
 
 export default function BookCard() {
   return (
-    <Card sx={{ maxWidth: 280, minWidth: 150 }}>
+    <Card sx={{ maxWidth: 400, minWidth: 150 }}>
       <CardMedia
         component="img"
-        alt="green iguana"
-        height="180"
+        alt="Book Card"
+        height="200"
         image="https://books.google.com/books/content?id=8Pr_kLFxciYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
       />
-      <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
+      <CardContent sx={{ maxHeight: 30, pt: 1 }}>
+        <Typography gutterBottom variant="h7" component="div">
           Lizard
         </Typography>
         <Typography variant="body3" color="text.secondary">

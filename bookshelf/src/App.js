@@ -12,7 +12,7 @@ import GoogleMapsComponent from "./GoogleMapsComponent";
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(0),
-  margin: theme.spacing(1),
+  margin: theme.spacing(0),
   marginTop: theme.spacing(1),
   // textAlign: "center",
   color: theme.palette.text.secondary,
@@ -20,14 +20,23 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function App() {
   return (
     <div className="App">
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} pl={2} pr={1}>
+      <Box
+        sx={{
+          flexGrow: 1,
+          width: "99%",
+
+          margin: "5px",
+
+          marginTop: "0",
+        }}
+      >
+        <Grid container spacing={0} rowSpacing={0} columnSpacing={1}>
+          <Grid item xs={12}>
             <Item>
               <NavBar />
             </Item>
           </Grid>
-          <Grid item xs={4} pl={1} pt={0} mt={0}>
+          <Grid item xs={4} pl={0} pt={0} ml={0}>
             <Item>
               <SideBar />
             </Item>
