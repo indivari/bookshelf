@@ -10,9 +10,9 @@ class MongoDB {
   }
 
   //connect to MongoDB Atlas Instance
-  connect() {
+  async connect() {
     //make async call with arrow fucntion format.
-    mongoose.connect(this.uri, { useNewUrlParser: true, useUnifiedTopology: true }).then((MongooseNode) => {
+    await mongoose.connect(this.uri, { useNewUrlParser: true, useUnifiedTopology: true }).then((MongooseNode) => {
       const nativeConnection = MongooseNode.connections[0];
       // connection established - use the Admin object grabbed above in the require
       new Admin(nativeConnection.db).listDatabases((err, result) => {
