@@ -22,28 +22,28 @@ function Sidebar() {
 
   useEffect(() => {
     axios
-      .get("./users/list")
+      .get("./books/list")
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
 
-        setBookData([res.data]);
-        console.log(bookData);
+        setBookData(res.data);
+        // console.log(bookData);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  // const books = bookData.map((data, id) => {
-  //   return <BookCard key={id} />;
-  // });
+  const books = bookData.map((data, id) => {
+    return <BookCard key={id} bookData={data.volumeInfo} />;
+  });
 
   return (
     <div>
       <SearchBar />
       <Box sx={{ flexGrow: 1, minWidth: 450 }}>
         <Grid container spacing={1} sx={{ flexGrow: 1 }}>
-          <BookCard />
+          {books}
         </Grid>
       </Box>
     </div>

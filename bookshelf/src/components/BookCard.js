@@ -16,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function BookCard() {
+export default function BookCard(props) {
   return (
     <Grid item xs={6} md={4} lg={3}>
       <Item>
@@ -25,18 +25,19 @@ export default function BookCard() {
             component="img"
             alt="Book Card"
             height="200"
-            image="https://books.google.com/books/content?id=8Pr_kLFxciYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            image={props.bookData?.imageLinks?.thumbnail}
+            // "https://books.google.com/books/content?id=8Pr_kLFxciYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
           />
           <CardContent sx={{ maxHeight: 30, pt: 1 }}>
             <Typography gutterBottom variant="h7" component="div">
-              Lizard
+              {props.bookData?.title}
             </Typography>
             <Typography variant="body3" color="text.secondary">
-              By Daniel Keyes
+              By {props.bookData?.authors[0]}
             </Typography>
           </CardContent>
           <CardActions>
-            <BookCardDetailModal />
+            <BookCardDetailModal bookDetail={props.bookData} />
 
             {/* <Button size="small">Learn More</Button> */}
           </CardActions>
