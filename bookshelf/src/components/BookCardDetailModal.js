@@ -34,10 +34,14 @@ export default function BookCardDetailModal({ bookData }) {
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
+
+  // consuming the context values
   const userContext = React.useContext(UserContext);
 
   const handleBorrowClick = () => {
     axios
+
+      // using the context values which is userInfo wherever you want them
       .post("/books/borrow", { bookId: _id, userId: userContext.userInfo?._id })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
