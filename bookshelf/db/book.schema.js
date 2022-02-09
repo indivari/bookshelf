@@ -1,12 +1,14 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const bookSchema = new Schema({
-  book_id: mongoose.Types.ObjectId,
-  GoogleBookInfo: Object,
-});
+const bookSchema = new Schema(
+  {
+    book_id: mongoose.Types.ObjectId,
+  },
+  { strict: false }
+);
 
-const Book = mongoose.model("books", bookSchema);
+const Books = mongoose.model("books", bookSchema);
 
 //GET BOOK MODEL
 const getBookModel = () => new User();
