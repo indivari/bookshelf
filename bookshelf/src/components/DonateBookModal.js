@@ -285,12 +285,14 @@ export default function DonateBookModal() {
           </p>
 
           <TextField
+            required
             onChange={(e) => setBookTitle(e.target.value)}
             id="outlined-read-only-input"
             label="Title"
             defaultValue=""
           />
           <TextField
+            required
             onChange={(e) => setBookAuthor(e.target.value)}
             id="outlined-read-only-input"
             label="Author"
