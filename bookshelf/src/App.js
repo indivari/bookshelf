@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 import { styled } from "@mui/material/styles";
@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
 import GoogleMapsComponent from "./GoogleMapsComponent";
+import { UserContext } from "./UserContext";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -18,39 +19,43 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 export default function App() {
+  const [userInfo, setUserInfo] = useState();
+
   return (
     <div className="App">
-      <Box
-        sx={{
-          flexGrow: 1,
-          width: "99%",
+      <UserContext.Provider value={{ userInfo, setUserInfo }}>
+        <Box
+          sx={{
+            flexGrow: 1,
+            width: "99%",
 
-          margin: "5px",
+            margin: "5px",
 
-          marginTop: "0",
-        }}
-      >
-        <Grid container spacing={0} rowSpacing={0} columnSpacing={1}>
-          <Grid item xs={12}>
-            <Item>
-              <NavBar />
-            </Item>
+            marginTop: "0",
+          }}
+        >
+          <Grid container spacing={0} rowSpacing={0} columnSpacing={1}>
+            <Grid item xs={12}>
+              <Item>
+                <NavBar />
+              </Item>
+            </Grid>
+            <Grid item xs={4} pl={0} pt={0} ml={0}>
+              <Item>
+                <SideBar />
+              </Item>
+            </Grid>
+            <Grid item xs={8} pr={1}>
+              <Item>
+                <GoogleMapsComponent />
+              </Item>
+            </Grid>
+            <Grid item xs={12} pr={1}>
+              <Item> Footer xs=12</Item>
+            </Grid>
           </Grid>
-          <Grid item xs={4} pl={0} pt={0} ml={0}>
-            <Item>
-              <SideBar />
-            </Item>
-          </Grid>
-          <Grid item xs={8} pr={1}>
-            <Item>
-              <GoogleMapsComponent />
-            </Item>
-          </Grid>
-          <Grid item xs={12} pr={1}>
-            <Item> Footer xs=12</Item>
-          </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      </UserContext.Provider>
     </div>
   );
 }

@@ -35,7 +35,7 @@ function Sidebar() {
   }, []);
 
   const books = bookData.map((data, id) => {
-    return <BookCard key={id} bookData={data.volumeInfo} />;
+    return <BookCard key={id} bookData={data} />;
   });
 
   return (

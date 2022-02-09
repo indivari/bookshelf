@@ -8,6 +8,8 @@ import FormControl from "@mui/material/FormControl";
 import CardMedia from "@mui/material/CardMedia";
 
 import TextField from "@mui/material/TextField";
+import axios from "axios";
+import { UserContext } from "../UserContext";
 
 const style = {
   position: "absolute",
@@ -25,20 +27,25 @@ const style = {
 // booke title with author: https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyDmkfSjnnPP6Zl7m0MkrTDQZEjOP0g8y4A
 //book title only search : https://www.googleapis.com/books/v1/volumes?q=flowers&key=AIzaSyDmkfSjnnPP6Zl7m0MkrTDQZEjOP0g8y4A
 
-export default function BookCardDetailModal(props) {
+export default function BookCardDetailModal({ bookData }) {
+  const { volumeInfo, status, _id } = bookData;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
-    fetch(
-      "https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyDmkfSjnnPP6Zl7m0MkrTDQZEjOP0g8y4A"
-    )
-      .then((res) => res.json())
-      .then((res) => console.log(res.items[0]["volumeInfo"]));
-
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
+  const userContext = React.useContext(UserContext);
 
-  // console.log(props);
+  const handleBorrowClick = () => {
+    axios
+      .post("/books/borrow", { bookId: _id, userId: userContext.userInfo?._id })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  const enableBorrow =
+    !!userContext.userInfo && (!status || status === "available");
+
   return (
     <div>
       <Button size="small" onClick={handleOpen}>
@@ -63,7 +70,7 @@ export default function BookCardDetailModal(props) {
               <TextField
                 id="outlined-read-only-input"
                 label="Title"
-                defaultValue={props.bookDetail?.title}
+                defaultValue={volumeInfo?.title}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -71,7 +78,7 @@ export default function BookCardDetailModal(props) {
               <TextField
                 id="outlined-read-only-input"
                 label="Author"
-                defaultValue={props.bookDetail?.authors}
+                defaultValue={volumeInfo?.authors}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -80,7 +87,7 @@ export default function BookCardDetailModal(props) {
               <TextField
                 id="outlined-read-only-input"
                 label="Category"
-                defaultValue={props.bookDetail?.categories}
+                defaultValue={volumeInfo?.categories}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -88,7 +95,7 @@ export default function BookCardDetailModal(props) {
               <TextField
                 id="outlined-read-only-input"
                 label="Subtitle"
-                defaultValue={props.bookDetail?.subtitle}
+                defaultValue={volumeInfo?.subtitle}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -96,7 +103,7 @@ export default function BookCardDetailModal(props) {
               <TextField
                 id="outlined-read-only-input"
                 label="Average Rating"
-                defaultValue={props.bookDetail?.averageRating}
+                defaultValue={volumeInfo?.averageRating}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -104,7 +111,7 @@ export default function BookCardDetailModal(props) {
               <TextField
                 id="outlined-read-only-input"
                 label="Published Date"
-                defaultValue={props.bookDetail?.publishedDate}
+                defaultValue={volumeInfo?.publishedDate}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -114,14 +121,14 @@ export default function BookCardDetailModal(props) {
                 label="Description"
                 multiline
                 maxRows={4}
-                value={props.bookDetail?.description}
+                value={volumeInfo?.description}
                 // onChange={handleChange}
               />
 
               <TextField
                 id="outlined-read-only-input"
                 label="Maturity Rating"
-                defaultValue={props.bookDetail?.maturityRating}
+                defaultValue={volumeInfo?.maturityRating}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -130,17 +137,21 @@ export default function BookCardDetailModal(props) {
               <TextField
                 id="outlined-read-only-input"
                 label="availability"
-                defaultValue="in stock"
+                defaultValue={status}
                 InputProps={{
                   readOnly: true,
                 }}
               />
+
               <Button
                 variant="contained"
-                style={{ background: "#ffa722", color: "white" }}
+                // style={{ background: "#ffa722", color: "white" }}
+                onClick={handleBorrowClick}
+                disabled={!enableBorrow}
               >
-                Borrow
+                {!!userContext.userInfo ? "Borrow" : "Please login to borrow"}
               </Button>
+
               {/* <Box>
                 <CardMedia
                   component="img"

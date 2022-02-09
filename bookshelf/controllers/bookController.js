@@ -1,4 +1,5 @@
 const books = require("../model/books");
+const { borrowBook } = require("./../model/userBooks");
 
 //GET search for books
 exports.books_list_get = async function (req, res) {
@@ -13,6 +14,11 @@ exports.book_details_get = function (req, res) {
 
 //GET a particular book
 exports.book_borrow_post = function (req, res) {
+  const { bookId, userId } = req.body;
+  // If book is available
+  // Mark it as lent
+  // Insert a record to user_books
+  borrowBook({ bookId, userId });
   res.send("Borrow a book");
 };
 

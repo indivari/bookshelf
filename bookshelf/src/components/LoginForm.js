@@ -5,20 +5,23 @@ import { Button } from "@mui/material";
 import Logout from "@mui/icons-material/Logout";
 import Login from "@mui/icons-material/Login";
 import axios from "axios";
+import { UserContext } from "../UserContext";
 
 export default function LoginForm() {
   const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(false);
   const [userEmail, setUserEmail] = React.useState("");
   const [userPassword, setUserPassword] = React.useState("");
   const [userInfo, setUserInfo] = React.useState("");
+  const userContext = React.useContext(UserContext);
 
   const handleLoginClick = () => {
     axios
       .get("./users/details", { params: { userEmail, userPassword } })
       .then((res) => {
+        const info = res.data?.user;
         setIsUserLoggedIn(true);
-        console.log(res.data.user);
-        setUserInfo(res.data?.user?.fullname);
+        setUserInfo(info?.fullname);
+        userContext.setUserInfo(info);
       })
       .catch(setIsUserLoggedIn(false));
   };
@@ -38,7 +41,7 @@ export default function LoginForm() {
     >
       <div>
         {isUserLoggedIn ? (
-          <>Welcome {userInfo}</>
+          <div style={{ color: "black" }}>Welcome {userInfo}</div>
         ) : (
           <>
             <TextField

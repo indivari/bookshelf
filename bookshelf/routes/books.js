@@ -6,7 +6,7 @@ router.post("/donate", bookController.create_book_post);
 
 router.get("/list", bookController.books_list_get);
 
-router.get("/borrow", bookController.book_borrow_post);
+router.post("/borrow", bookController.book_borrow_post);
 
 router.get("/details", bookController.book_details_get);
 
