@@ -6,13 +6,15 @@ const BookSchema = require("../db/book.schema");
 // Compile model from schema
 const BookModel = mongoose.model("books", BookSchema.bookSchema);
 
-async function donate_book(tempdata) {
+async function donate_book(book) {
   const document = new BookModel(book);
   return await document.save();
 }
 
 async function list_books(searchQuery) {
-  return await BookModel.find({ "volumeInfo.title": { $regex: ".*" + searchQuery + ".*" } });
+  return await BookModel.find({
+    "volumeInfo.title": { $regex: ".*" + searchQuery + ".*" },
+  });
   // return await document.save();
 }
 
@@ -62,13 +64,18 @@ const bulk_data = [
         containsImageBubbles: false,
       },
       imageLinks: {
-        smallThumbnail: "http://books.google.com/books/content?id=8Pr_kLFxciYC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-        thumbnail: "http://books.google.com/books/content?id=8Pr_kLFxciYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        smallThumbnail:
+          "http://books.google.com/books/content?id=8Pr_kLFxciYC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+        thumbnail:
+          "http://books.google.com/books/content?id=8Pr_kLFxciYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       },
       language: "en",
-      previewLink: "http://books.google.com.au/books?id=8Pr_kLFxciYC&printsec=frontcover&dq=flowers+inauthor:keyes&hl=&cd=1&source=gbs_api",
-      infoLink: "https://play.google.com/store/books/details?id=8Pr_kLFxciYC&source=gbs_api",
-      canonicalVolumeLink: "https://play.google.com/store/books/details?id=8Pr_kLFxciYC",
+      previewLink:
+        "http://books.google.com.au/books?id=8Pr_kLFxciYC&printsec=frontcover&dq=flowers+inauthor:keyes&hl=&cd=1&source=gbs_api",
+      infoLink:
+        "https://play.google.com/store/books/details?id=8Pr_kLFxciYC&source=gbs_api",
+      canonicalVolumeLink:
+        "https://play.google.com/store/books/details?id=8Pr_kLFxciYC",
     },
     saleInfo: {
       country: "AU",
@@ -82,7 +89,8 @@ const bulk_data = [
         amount: 9.99,
         currencyCode: "AUD",
       },
-      buyLink: "https://play.google.com/store/books/details?id=8Pr_kLFxciYC&rdid=book-8Pr_kLFxciYC&rdot=1&source=gbs_api",
+      buyLink:
+        "https://play.google.com/store/books/details?id=8Pr_kLFxciYC&rdid=book-8Pr_kLFxciYC&rdot=1&source=gbs_api",
       offers: [
         {
           finskyOfferType: 1,
@@ -112,7 +120,8 @@ const bulk_data = [
       pdf: {
         isAvailable: false,
       },
-      webReaderLink: "http://play.google.com/books/reader?id=8Pr_kLFxciYC&hl=&printsec=frontcover&source=gbs_api",
+      webReaderLink:
+        "http://play.google.com/books/reader?id=8Pr_kLFxciYC&hl=&printsec=frontcover&source=gbs_api",
       accessViewStatus: "SAMPLE",
       quoteSharingAllowed: false,
     },
@@ -143,13 +152,18 @@ const bulk_data = [
         containsImageBubbles: false,
       },
       imageLinks: {
-        smallThumbnail: "http://books.google.com/books/content?id=Fgn65IL3q4wC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-        thumbnail: "http://books.google.com/books/content?id=Fgn65IL3q4wC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        smallThumbnail:
+          "http://books.google.com/books/content?id=Fgn65IL3q4wC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+        thumbnail:
+          "http://books.google.com/books/content?id=Fgn65IL3q4wC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       },
       language: "en",
-      previewLink: "http://books.google.com.au/books?id=Fgn65IL3q4wC&q=flowers+inauthor:keyes&dq=flowers+inauthor:keyes&hl=&cd=2&source=gbs_api",
-      infoLink: "http://books.google.com.au/books?id=Fgn65IL3q4wC&dq=flowers+inauthor:keyes&hl=&source=gbs_api",
-      canonicalVolumeLink: "https://books.google.com/books/about/Flowers_for_Algernon.html?hl=&id=Fgn65IL3q4wC",
+      previewLink:
+        "http://books.google.com.au/books?id=Fgn65IL3q4wC&q=flowers+inauthor:keyes&dq=flowers+inauthor:keyes&hl=&cd=2&source=gbs_api",
+      infoLink:
+        "http://books.google.com.au/books?id=Fgn65IL3q4wC&dq=flowers+inauthor:keyes&hl=&source=gbs_api",
+      canonicalVolumeLink:
+        "https://books.google.com/books/about/Flowers_for_Algernon.html?hl=&id=Fgn65IL3q4wC",
     },
     saleInfo: {
       country: "AU",
@@ -168,7 +182,8 @@ const bulk_data = [
       pdf: {
         isAvailable: false,
       },
-      webReaderLink: "http://play.google.com/books/reader?id=Fgn65IL3q4wC&hl=&printsec=frontcover&source=gbs_api",
+      webReaderLink:
+        "http://play.google.com/books/reader?id=Fgn65IL3q4wC&hl=&printsec=frontcover&source=gbs_api",
       accessViewStatus: "NONE",
       quoteSharingAllowed: false,
     },
@@ -211,13 +226,18 @@ const bulk_data = [
         containsImageBubbles: false,
       },
       imageLinks: {
-        smallThumbnail: "http://books.google.com/books/content?id=F1wgqlNi8AMC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-        thumbnail: "http://books.google.com/books/content?id=F1wgqlNi8AMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        smallThumbnail:
+          "http://books.google.com/books/content?id=F1wgqlNi8AMC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+        thumbnail:
+          "http://books.google.com/books/content?id=F1wgqlNi8AMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       },
       language: "en",
-      previewLink: "http://books.google.com.au/books?id=F1wgqlNi8AMC&printsec=frontcover&dq=flowers+inauthor:keyes&hl=&cd=3&source=gbs_api",
-      infoLink: "http://books.google.com.au/books?id=F1wgqlNi8AMC&dq=flowers+inauthor:keyes&hl=&source=gbs_api",
-      canonicalVolumeLink: "https://books.google.com/books/about/Flowers_for_Algernon.html?hl=&id=F1wgqlNi8AMC",
+      previewLink:
+        "http://books.google.com.au/books?id=F1wgqlNi8AMC&printsec=frontcover&dq=flowers+inauthor:keyes&hl=&cd=3&source=gbs_api",
+      infoLink:
+        "http://books.google.com.au/books?id=F1wgqlNi8AMC&dq=flowers+inauthor:keyes&hl=&source=gbs_api",
+      canonicalVolumeLink:
+        "https://books.google.com/books/about/Flowers_for_Algernon.html?hl=&id=F1wgqlNi8AMC",
     },
     saleInfo: {
       country: "AU",
@@ -236,12 +256,14 @@ const bulk_data = [
       pdf: {
         isAvailable: false,
       },
-      webReaderLink: "http://play.google.com/books/reader?id=F1wgqlNi8AMC&hl=&printsec=frontcover&source=gbs_api",
+      webReaderLink:
+        "http://play.google.com/books/reader?id=F1wgqlNi8AMC&hl=&printsec=frontcover&source=gbs_api",
       accessViewStatus: "SAMPLE",
       quoteSharingAllowed: false,
     },
     searchInfo: {
-      textSnippet: "The compelling story of Charlie Gordon, willing victim of a strange experiment - a moron, a genius, a man in search of himself.",
+      textSnippet:
+        "The compelling story of Charlie Gordon, willing victim of a strange experiment - a moron, a genius, a man in search of himself.",
     },
   },
   {
@@ -284,13 +306,18 @@ const bulk_data = [
         containsImageBubbles: false,
       },
       imageLinks: {
-        smallThumbnail: "http://books.google.com/books/content?id=8Pr_kLFxciYC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-        thumbnail: "http://books.google.com/books/content?id=8Pr_kLFxciYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        smallThumbnail:
+          "http://books.google.com/books/content?id=8Pr_kLFxciYC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+        thumbnail:
+          "http://books.google.com/books/content?id=8Pr_kLFxciYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       },
       language: "en",
-      previewLink: "http://books.google.com.au/books?id=8Pr_kLFxciYC&pg=PT240&dq=flowers+inauthor:keyes&hl=&cd=4&source=gbs_api",
-      infoLink: "https://play.google.com/store/books/details?id=8Pr_kLFxciYC&source=gbs_api",
-      canonicalVolumeLink: "https://play.google.com/store/books/details?id=8Pr_kLFxciYC",
+      previewLink:
+        "http://books.google.com.au/books?id=8Pr_kLFxciYC&pg=PT240&dq=flowers+inauthor:keyes&hl=&cd=4&source=gbs_api",
+      infoLink:
+        "https://play.google.com/store/books/details?id=8Pr_kLFxciYC&source=gbs_api",
+      canonicalVolumeLink:
+        "https://play.google.com/store/books/details?id=8Pr_kLFxciYC",
     },
     saleInfo: {
       country: "AU",
@@ -304,7 +331,8 @@ const bulk_data = [
         amount: 9.99,
         currencyCode: "AUD",
       },
-      buyLink: "https://play.google.com/store/books/details?id=8Pr_kLFxciYC&rdid=book-8Pr_kLFxciYC&rdot=1&source=gbs_api",
+      buyLink:
+        "https://play.google.com/store/books/details?id=8Pr_kLFxciYC&rdid=book-8Pr_kLFxciYC&rdot=1&source=gbs_api",
       offers: [
         {
           finskyOfferType: 1,
@@ -334,7 +362,8 @@ const bulk_data = [
       pdf: {
         isAvailable: false,
       },
-      webReaderLink: "http://play.google.com/books/reader?id=8Pr_kLFxciYC&hl=&printsec=frontcover&source=gbs_api",
+      webReaderLink:
+        "http://play.google.com/books/reader?id=8Pr_kLFxciYC&hl=&printsec=frontcover&source=gbs_api",
       accessViewStatus: "SAMPLE",
       quoteSharingAllowed: false,
     },
@@ -381,13 +410,18 @@ const bulk_data = [
         containsImageBubbles: false,
       },
       imageLinks: {
-        smallThumbnail: "http://books.google.com/books/content?id=gK98gXR8onwC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-        thumbnail: "http://books.google.com/books/content?id=gK98gXR8onwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        smallThumbnail:
+          "http://books.google.com/books/content?id=gK98gXR8onwC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+        thumbnail:
+          "http://books.google.com/books/content?id=gK98gXR8onwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       },
       language: "en",
-      previewLink: "http://books.google.com.au/books?id=gK98gXR8onwC&pg=PA3&dq=flowers+inauthor:keyes&hl=&cd=5&source=gbs_api",
-      infoLink: "http://books.google.com.au/books?id=gK98gXR8onwC&dq=flowers+inauthor:keyes&hl=&source=gbs_api",
-      canonicalVolumeLink: "https://books.google.com/books/about/Flowers_for_Algernon.html?hl=&id=gK98gXR8onwC",
+      previewLink:
+        "http://books.google.com.au/books?id=gK98gXR8onwC&pg=PA3&dq=flowers+inauthor:keyes&hl=&cd=5&source=gbs_api",
+      infoLink:
+        "http://books.google.com.au/books?id=gK98gXR8onwC&dq=flowers+inauthor:keyes&hl=&source=gbs_api",
+      canonicalVolumeLink:
+        "https://books.google.com/books/about/Flowers_for_Algernon.html?hl=&id=gK98gXR8onwC",
     },
     saleInfo: {
       country: "AU",
@@ -406,7 +440,8 @@ const bulk_data = [
       pdf: {
         isAvailable: false,
       },
-      webReaderLink: "http://play.google.com/books/reader?id=gK98gXR8onwC&hl=&printsec=frontcover&source=gbs_api",
+      webReaderLink:
+        "http://play.google.com/books/reader?id=gK98gXR8onwC&hl=&printsec=frontcover&source=gbs_api",
       accessViewStatus: "SAMPLE",
       quoteSharingAllowed: false,
     },
@@ -453,13 +488,18 @@ const bulk_data = [
         containsImageBubbles: false,
       },
       imageLinks: {
-        smallThumbnail: "http://books.google.com/books/content?id=gK98gXR8onwC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-        thumbnail: "http://books.google.com/books/content?id=gK98gXR8onwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        smallThumbnail:
+          "http://books.google.com/books/content?id=gK98gXR8onwC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+        thumbnail:
+          "http://books.google.com/books/content?id=gK98gXR8onwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       },
       language: "en",
-      previewLink: "http://books.google.com.au/books?id=gK98gXR8onwC&printsec=frontcover&dq=flowers+inauthor:keyes&hl=&cd=6&source=gbs_api",
-      infoLink: "http://books.google.com.au/books?id=gK98gXR8onwC&dq=flowers+inauthor:keyes&hl=&source=gbs_api",
-      canonicalVolumeLink: "https://books.google.com/books/about/Flowers_for_Algernon.html?hl=&id=gK98gXR8onwC",
+      previewLink:
+        "http://books.google.com.au/books?id=gK98gXR8onwC&printsec=frontcover&dq=flowers+inauthor:keyes&hl=&cd=6&source=gbs_api",
+      infoLink:
+        "http://books.google.com.au/books?id=gK98gXR8onwC&dq=flowers+inauthor:keyes&hl=&source=gbs_api",
+      canonicalVolumeLink:
+        "https://books.google.com/books/about/Flowers_for_Algernon.html?hl=&id=gK98gXR8onwC",
     },
     saleInfo: {
       country: "AU",
@@ -478,7 +518,8 @@ const bulk_data = [
       pdf: {
         isAvailable: false,
       },
-      webReaderLink: "http://play.google.com/books/reader?id=gK98gXR8onwC&hl=&printsec=frontcover&source=gbs_api",
+      webReaderLink:
+        "http://play.google.com/books/reader?id=gK98gXR8onwC&hl=&printsec=frontcover&source=gbs_api",
       accessViewStatus: "SAMPLE",
       quoteSharingAllowed: false,
     },
@@ -519,13 +560,18 @@ const bulk_data = [
       contentVersion: "preview-1.0.0",
       comicsContent: true,
       imageLinks: {
-        smallThumbnail: "http://books.google.com/books/content?id=9ygPPQAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-        thumbnail: "http://books.google.com/books/content?id=9ygPPQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        smallThumbnail:
+          "http://books.google.com/books/content?id=9ygPPQAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+        thumbnail:
+          "http://books.google.com/books/content?id=9ygPPQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       },
       language: "es",
-      previewLink: "http://books.google.com.au/books?id=9ygPPQAACAAJ&dq=flowers+inauthor:keyes&hl=&cd=7&source=gbs_api",
-      infoLink: "http://books.google.com.au/books?id=9ygPPQAACAAJ&dq=flowers+inauthor:keyes&hl=&source=gbs_api",
-      canonicalVolumeLink: "https://books.google.com/books/about/Flores_para_Algernon.html?hl=&id=9ygPPQAACAAJ",
+      previewLink:
+        "http://books.google.com.au/books?id=9ygPPQAACAAJ&dq=flowers+inauthor:keyes&hl=&cd=7&source=gbs_api",
+      infoLink:
+        "http://books.google.com.au/books?id=9ygPPQAACAAJ&dq=flowers+inauthor:keyes&hl=&source=gbs_api",
+      canonicalVolumeLink:
+        "https://books.google.com/books/about/Flores_para_Algernon.html?hl=&id=9ygPPQAACAAJ",
     },
     saleInfo: {
       country: "AU",
@@ -544,7 +590,8 @@ const bulk_data = [
       pdf: {
         isAvailable: false,
       },
-      webReaderLink: "http://play.google.com/books/reader?id=9ygPPQAACAAJ&hl=&printsec=frontcover&source=gbs_api",
+      webReaderLink:
+        "http://play.google.com/books/reader?id=9ygPPQAACAAJ&hl=&printsec=frontcover&source=gbs_api",
       accessViewStatus: "NONE",
       quoteSharingAllowed: false,
     },
@@ -560,7 +607,8 @@ const bulk_data = [
     selfLink: "https://www.googleapis.com/books/v1/volumes/6WrhAAAAMAAJ",
     volumeInfo: {
       title: "Algernon, Charlie, and I",
-      subtitle: 'A Writer\'s Journey : Plus the Complete Original Short Novelette Version of "Flowers for Algernon"',
+      subtitle:
+        'A Writer\'s Journey : Plus the Complete Original Short Novelette Version of "Flowers for Algernon"',
       authors: ["Daniel Keyes"],
       publisher: "Challenge PressInc",
       publishedDate: "1999",
@@ -589,13 +637,18 @@ const bulk_data = [
         containsImageBubbles: false,
       },
       imageLinks: {
-        smallThumbnail: "http://books.google.com/books/content?id=6WrhAAAAMAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-        thumbnail: "http://books.google.com/books/content?id=6WrhAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        smallThumbnail:
+          "http://books.google.com/books/content?id=6WrhAAAAMAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+        thumbnail:
+          "http://books.google.com/books/content?id=6WrhAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       },
       language: "en",
-      previewLink: "http://books.google.com.au/books?id=6WrhAAAAMAAJ&q=flowers+inauthor:keyes&dq=flowers+inauthor:keyes&hl=&cd=8&source=gbs_api",
-      infoLink: "http://books.google.com.au/books?id=6WrhAAAAMAAJ&dq=flowers+inauthor:keyes&hl=&source=gbs_api",
-      canonicalVolumeLink: "https://books.google.com/books/about/Algernon_Charlie_and_I.html?hl=&id=6WrhAAAAMAAJ",
+      previewLink:
+        "http://books.google.com.au/books?id=6WrhAAAAMAAJ&q=flowers+inauthor:keyes&dq=flowers+inauthor:keyes&hl=&cd=8&source=gbs_api",
+      infoLink:
+        "http://books.google.com.au/books?id=6WrhAAAAMAAJ&dq=flowers+inauthor:keyes&hl=&source=gbs_api",
+      canonicalVolumeLink:
+        "https://books.google.com/books/about/Algernon_Charlie_and_I.html?hl=&id=6WrhAAAAMAAJ",
     },
     saleInfo: {
       country: "AU",
@@ -614,7 +667,8 @@ const bulk_data = [
       pdf: {
         isAvailable: false,
       },
-      webReaderLink: "http://play.google.com/books/reader?id=6WrhAAAAMAAJ&hl=&printsec=frontcover&source=gbs_api",
+      webReaderLink:
+        "http://play.google.com/books/reader?id=6WrhAAAAMAAJ&hl=&printsec=frontcover&source=gbs_api",
       accessViewStatus: "NONE",
       quoteSharingAllowed: false,
     },
@@ -633,7 +687,8 @@ const bulk_data = [
       authors: ["Daniel Keyes"],
       publisher: "Turtleback Books",
       publishedDate: "2001-01-01",
-      description: "Mentally handicapped Charlie Gordon participates in an experiment which turns him into a genius temporarily.",
+      description:
+        "Mentally handicapped Charlie Gordon participates in an experiment which turns him into a genius temporarily.",
       industryIdentifiers: [
         {
           type: "ISBN_10",
@@ -655,13 +710,18 @@ const bulk_data = [
       allowAnonLogging: false,
       contentVersion: "preview-1.0.0",
       imageLinks: {
-        smallThumbnail: "http://books.google.com/books/content?id=KY_-oAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-        thumbnail: "http://books.google.com/books/content?id=KY_-oAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        smallThumbnail:
+          "http://books.google.com/books/content?id=KY_-oAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+        thumbnail:
+          "http://books.google.com/books/content?id=KY_-oAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       },
       language: "es",
-      previewLink: "http://books.google.com.au/books?id=KY_-oAEACAAJ&dq=flowers+inauthor:keyes&hl=&cd=9&source=gbs_api",
-      infoLink: "http://books.google.com.au/books?id=KY_-oAEACAAJ&dq=flowers+inauthor:keyes&hl=&source=gbs_api",
-      canonicalVolumeLink: "https://books.google.com/books/about/Flores_Para_Algernon.html?hl=&id=KY_-oAEACAAJ",
+      previewLink:
+        "http://books.google.com.au/books?id=KY_-oAEACAAJ&dq=flowers+inauthor:keyes&hl=&cd=9&source=gbs_api",
+      infoLink:
+        "http://books.google.com.au/books?id=KY_-oAEACAAJ&dq=flowers+inauthor:keyes&hl=&source=gbs_api",
+      canonicalVolumeLink:
+        "https://books.google.com/books/about/Flores_Para_Algernon.html?hl=&id=KY_-oAEACAAJ",
     },
     saleInfo: {
       country: "AU",
@@ -680,12 +740,14 @@ const bulk_data = [
       pdf: {
         isAvailable: false,
       },
-      webReaderLink: "http://play.google.com/books/reader?id=KY_-oAEACAAJ&hl=&printsec=frontcover&source=gbs_api",
+      webReaderLink:
+        "http://play.google.com/books/reader?id=KY_-oAEACAAJ&hl=&printsec=frontcover&source=gbs_api",
       accessViewStatus: "NONE",
       quoteSharingAllowed: false,
     },
     searchInfo: {
-      textSnippet: "Mentally handicapped Charlie Gordon participates in an experiment which turns him into a genius temporarily.",
+      textSnippet:
+        "Mentally handicapped Charlie Gordon participates in an experiment which turns him into a genius temporarily.",
     },
   },
   {
@@ -694,7 +756,8 @@ const bulk_data = [
     etag: "+Oye2hdDoOM",
     selfLink: "https://www.googleapis.com/books/v1/volumes/LRlCAAAAYAAJ",
     volumeInfo: {
-      title: "Some Environmental Factors Influencing Bud Formation, Abscission and Flower Production of Gardenias",
+      title:
+        "Some Environmental Factors Influencing Bud Formation, Abscission and Flower Production of Gardenias",
       authors: ["Curtis Gilbert Keyes"],
       publishedDate: "1946",
       industryIdentifiers: [
@@ -718,13 +781,18 @@ const bulk_data = [
         containsImageBubbles: false,
       },
       imageLinks: {
-        smallThumbnail: "http://books.google.com/books/content?id=LRlCAAAAYAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-        thumbnail: "http://books.google.com/books/content?id=LRlCAAAAYAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+        smallThumbnail:
+          "http://books.google.com/books/content?id=LRlCAAAAYAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+        thumbnail:
+          "http://books.google.com/books/content?id=LRlCAAAAYAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       },
       language: "en",
-      previewLink: "http://books.google.com.au/books?id=LRlCAAAAYAAJ&q=flowers+inauthor:keyes&dq=flowers+inauthor:keyes&hl=&cd=10&source=gbs_api",
-      infoLink: "http://books.google.com.au/books?id=LRlCAAAAYAAJ&dq=flowers+inauthor:keyes&hl=&source=gbs_api",
-      canonicalVolumeLink: "https://books.google.com/books/about/Some_Environmental_Factors_Influencing_B.html?hl=&id=LRlCAAAAYAAJ",
+      previewLink:
+        "http://books.google.com.au/books?id=LRlCAAAAYAAJ&q=flowers+inauthor:keyes&dq=flowers+inauthor:keyes&hl=&cd=10&source=gbs_api",
+      infoLink:
+        "http://books.google.com.au/books?id=LRlCAAAAYAAJ&dq=flowers+inauthor:keyes&hl=&source=gbs_api",
+      canonicalVolumeLink:
+        "https://books.google.com/books/about/Some_Environmental_Factors_Influencing_B.html?hl=&id=LRlCAAAAYAAJ",
     },
     saleInfo: {
       country: "AU",
@@ -743,7 +811,8 @@ const bulk_data = [
       pdf: {
         isAvailable: false,
       },
-      webReaderLink: "http://play.google.com/books/reader?id=LRlCAAAAYAAJ&hl=&printsec=frontcover&source=gbs_api",
+      webReaderLink:
+        "http://play.google.com/books/reader?id=LRlCAAAAYAAJ&hl=&printsec=frontcover&source=gbs_api",
       accessViewStatus: "NONE",
       quoteSharingAllowed: false,
     },

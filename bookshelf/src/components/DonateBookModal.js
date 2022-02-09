@@ -9,6 +9,8 @@ import CardMedia from "@mui/material/CardMedia";
 import { Container } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import CancelIcon from "@mui/icons-material/Cancel";
+import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 
 const style = {
   position: "absolute",
@@ -31,16 +33,34 @@ function ChildModal(props) {
 
   const [open, setOpen] = React.useState(false);
   const [donateTitle, setDonateTitle] = useState("");
-  const handleOpen = () => {
+  const [donateAuthor, setDonateAuthor] = useState("");
+  const [category, setCategory] = useState("");
+  const [subtitle, setSubtitle] = useState("");
+  const [rating, setRating] = useState("");
+  const [publishedDate, setPublishDate] = useState("");
+  const [maturityRating, setMaturityRating] = useState("");
+  const [description, setDescription] = useState("");
+  const [availability, setAvailability] = useState("In Stock");
+  const [bookCover, setBookCover] = useState("");
+  const handleOpen = async (e) => {
     // https://www.googleapis.com/books/v1/volumes?q=intitle:flowers+inauthor:keyes&key=AIzaSyDmkfSjnnPP6Zl7m0MkrTDQZEjOP0g8y4A&maxResults=1
+    e.preventDefault();
 
-    axios
+    await axios
       .get(
         `https://www.googleapis.com/books/v1/volumes?q=intitle:${props.bookTitle}+inauthor:${props.bookAuthor}&key=${apiKey}&maxResults=1`
       )
       .then((data) => {
-        console.log(data.data.items[0]?.volumeInfo.title);
         setDonateTitle(data.data.items[0]?.volumeInfo.title);
+        setDonateAuthor(data.data.items[0]?.volumeInfo.authors);
+        setCategory(data.data.items[0]?.volumeInfo.categories);
+        setSubtitle(data.data.items[0]?.volumeInfo.subtitle);
+        setRating(data.data.items[0]?.volumeInfo.averageRating);
+        setPublishDate(data.data.items[0]?.volumeInfo.publishedDate);
+        setMaturityRating(data.data.items[0]?.volumeInfo.maturityRating);
+        setDescription(data.data.items[0]?.volumeInfo.description);
+        // setAvailability(data.data.items[0]?.volumeInfo.title);
+        setBookCover(data.data.items[0]?.volumeInfo.imageLinks.thumbnail);
         // setResult(data.data.items);
       });
     // console.log(props.bookTitle);
@@ -51,11 +71,36 @@ function ChildModal(props) {
     setOpen(false);
   };
 
+  const handleDonate = async (e) => {
+    e.preventDefault();
+
+    await axios
+      .post("./books/donate", {
+        volumeInfo: {
+          title: donateTitle,
+          authors: [donateAuthor],
+          categories: [category],
+          subtitle: subtitle,
+          averageRating: rating,
+          publishedDate: publishedDate,
+          maturityRating: maturityRating,
+          description: description,
+          availability: availability,
+          imageLinks: {
+            thumbnail: bookCover,
+          },
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  };
+
   return (
     <React.Fragment>
       <Button
         onClick={handleOpen}
-        endIcon={<BookmarkAddIcon />}
+        endIcon={<ManageSearchIcon />}
         style={{
           background: "#ffa722",
           color: "white",
@@ -69,7 +114,7 @@ function ChildModal(props) {
         LookUp
       </Button>
       <Modal hideBackdrop open={open} onClose={handleClose}>
-        <Box sx={{ ...style, width: 500, height: 650 }}>
+        <Box sx={{ ...style, width: 500, height: 720 }}>
           <h2 id="child-modal-title">Your Book Details</h2>
           <p id="child-modal-description">
             If this is correctly showing your book details then click Donate,
@@ -85,109 +130,109 @@ function ChildModal(props) {
               mt: 4,
             }}
           >
-            <TextField
-              id="outlined-read-only-input"
-              label="Title"
-              defaultValue={donateTitle}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <TextField
-              id="outlined-read-only-input"
-              label="Author"
-              defaultValue=""
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-
-            <TextField
-              id="outlined-read-only-input"
-              label="Category"
-              defaultValue=""
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <TextField
-              id="outlined-read-only-input"
-              label="Subtitle"
-              defaultValue=""
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <TextField
-              id="outlined-read-only-input"
-              label="Average Rating"
-              defaultValue=""
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <TextField
-              id="outlined-read-only-input"
-              label="Published Date"
-              defaultValue=""
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-
-            <TextField
-              id="outlined-read-only-input"
-              label="Maturity Rating"
-              defaultValue=""
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-
-            <TextField
-              id="outlined-read-only-input"
-              label="availability"
-              defaultValue="in stock"
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-
-            <Box position="absolute" top="105%" left="60%">
+            <Box position="absolute" top="-5%" left="60%">
               <Container>
                 <CardMedia
                   component="img"
                   alt="Book Card"
                   sx={{ width: 150 }}
-                  image="https://books.google.com/books/content?id=8Pr_kLFxciYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+                  image={bookCover}
                 />
               </Container>
             </Box>
+            <TextField
+              sx={{ marginTop: 30 }}
+              id="outlined-read-only-input"
+              label="Title"
+              defaultValue={donateTitle}
+              size="small"
+            />
+            <TextField
+              sx={{ marginTop: 30 }}
+              id="outlined-read-only-input"
+              label="Author"
+              defaultValue={donateAuthor}
+              size="small"
+            />
+
+            <TextField
+              id="outlined-read-only-input"
+              label="Category"
+              defaultValue={category}
+              size="small"
+            />
+            <TextField
+              id="outlined-read-only-input"
+              label="Subtitle"
+              defaultValue={subtitle}
+              size="small"
+            />
+            <TextField
+              id="outlined-read-only-input"
+              label="Average Rating"
+              defaultValue={rating}
+              size="small"
+            />
+            <TextField
+              id="outlined-read-only-input"
+              label="Published Date"
+              defaultValue={publishedDate}
+              size="small"
+            />
+
+            <TextField
+              id="outlined-read-only-input"
+              label="Maturity Rating"
+              defaultValue={maturityRating}
+              size="small"
+            />
+
+            <TextField
+              id="outlined-read-only-input"
+              label="availability"
+              defaultValue={availability}
+              size="small"
+            />
+
+            <TextField
+              id="outlined-multiline-flexible"
+              label="Description"
+              multiline
+              maxRows={4}
+              value={description}
+              size="small"
+              // onChange={handleChange}
+            />
           </FormControl>
 
           <Button
-            // onClick={handleDonate}
+            onClick={handleDonate}
             variant="contained"
             endIcon={<BookmarkAddIcon />}
-            style={{ background: "#ffa722", color: "white", marginTop: 25 }}
+            style={{
+              background: "#ffa722",
+              color: "white",
+              marginTop: -100,
+              marginLeft: 275,
+            }}
           >
             Donate
           </Button>
 
           <Button
             onClick={handleClose}
-            endIcon={<BookmarkAddIcon />}
+            endIcon={<CancelIcon />}
             style={{
               background: "#ffa722",
               color: "white",
-              marginTop: 25,
+              marginTop: -100,
               marginLeft: 10,
               // fontSize: 13,
               // width: 200,
               // height: 50,
             }}
           >
-            Cancel
+            Close
           </Button>
         </Box>
       </Modal>
