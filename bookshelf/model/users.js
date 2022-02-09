@@ -14,8 +14,13 @@ class User {
 
 const NewUser = mongoose.model("users", UserModel.userSchema);
 
-function get_user_details() {
-  return { message: "getting user details from the database in the model" };
+async function get_user_details({ userEmail, userPassword }) {
+  const result = await NewUser.findOne({
+    email: userEmail,
+    password: userPassword,
+  }).exec();
+
+  return { success: !!result, user: result };
 }
 
 async function add_user(user) {

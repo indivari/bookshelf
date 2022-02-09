@@ -32,24 +32,6 @@ export default function ButtonAppBar() {
 
           {isUserLoggedIn ? <></> : <LoginForm />}
 
-          {isUserLoggedIn ? (
-            <Button
-              onClick={handleLogoutClick}
-              endIcon={<Logout />}
-              style={{ background: "#ffa722", color: "white", marginRight: 30 }}
-            >
-              Logout
-            </Button>
-          ) : (
-            <Button
-              onClick={handleLoginClick}
-              endIcon={<Login />}
-              style={{ background: "#ffa722", color: "white", marginRight: 20 }}
-            >
-              Login
-            </Button>
-          )}
-
           {isUserLoggedIn ? <></> : <SignupModal />}
 
           {isUserLoggedIn ? <AccountModal /> : <></>}
