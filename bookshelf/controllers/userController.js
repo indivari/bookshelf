@@ -12,6 +12,7 @@ exports.user_details_get = function (req, res) {
 };
 
 //POST new user
-exports.create_user_post = function (req, res) {
-  res.send(users.add_user());
+exports.create_user_post = async function (req, res) {
+  const result = await users.add_user(req.body);
+  res.send(result, 201);
 };

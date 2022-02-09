@@ -18,10 +18,11 @@ function get_user_details() {
   return { message: "getting user details from the database in the model" };
 }
 
-function add_user() {
-  const document = new NewUser();
-  return { message: "adding a user - hitting the model" };
+async function add_user(user) {
+  const document = new NewUser(user);
+  return await document.save();
 }
+
 module.exports = {
   User,
   add_user,
