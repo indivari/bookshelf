@@ -7,6 +7,8 @@ import RegIcon from "@mui/icons-material/HowToReg";
 import FormControl from "@mui/material/FormControl";
 // import OutlinedInput from "@mui/material/OutlinedInput";
 import TextField from "@mui/material/TextField";
+import { useState } from "react";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -21,9 +23,29 @@ const style = {
 };
 
 export default function SignupModal() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [address, setAddress] = useState("");
+
+  const handleSubmitUser = (e) => {
+    e.preventDefault();
+
+    axios
+      .post("./users/add", {
+        fullname: name,
+        email: email,
+        password: password,
+        address: address,
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  };
 
   return (
     <div>
@@ -46,29 +68,43 @@ export default function SignupModal() {
                 display: "grid",
                 gridTemplateColumns: { sm: "1fr" },
                 gap: 2,
+                mt: 4,
               }}
             >
               <TextField
-                id="outlined-input-name"
+                onChange={(e) => setName(e.target.value)}
+                id="userName"
                 label="Name"
                 defaultValue=""
                 InputProps={{}}
               />
               <TextField
+                onChange={(e) => setEmail(e.target.value)}
                 id="outlined-input-email"
                 label="Email"
                 defaultValue=""
                 InputProps={{}}
               />
               <TextField
+                onChange={(e) => setPassword(e.target.value)}
                 id="outlined-input-password"
                 label="Password"
                 defaultValue=""
                 InputProps={{}}
                 type="password"
               />
+              <TextField
+                onChange={(e) => setAddress(e.target.value)}
+                id="outlined-input-address"
+                label="Address"
+                defaultValue=""
+                InputProps={{}}
+                type="text"
+              />
 
               <Button
+                type="submit"
+                onClick={handleSubmitUser}
                 variant="contained"
                 style={{ background: "#ffa722", color: "white" }}
               >
