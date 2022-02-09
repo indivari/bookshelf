@@ -13,5 +13,6 @@ exports.user_details_get = function (req, res) {
 
 //POST new user
 exports.create_user_post = function (req, res) {
-  res.send(users.add_user());
+  // res.send(users.add_user());
+  console.log(req);
 };
