@@ -4,11 +4,7 @@ const UserModel = require("../db/user.schema");
 
 class User {
   constructor() {
-    (this.fullname = ""),
-      (this.email = ""),
-      (this.address = ""),
-      (this.latlng = { lat: 0, lng: 0 }),
-      (this.password = "");
+    (this.fullname = ""), (this.email = ""), (this.address = ""), (this.latlng = { lat: 0, lng: 0 }), (this.password = "");
   }
 }
 
@@ -28,8 +24,12 @@ async function add_user(user) {
   return await document.save();
 }
 
+async function get_all_users() {
+  return await NewUser.find().exec();
+}
 module.exports = {
   User,
   add_user,
   get_user_details,
+  get_all_users,
 };

@@ -10,4 +10,7 @@ router.get("/list", userController.user_list_get);
 router.get("/details", userController.user_details_get);
 
 router.get("/userBooks", userBookController.get_userBooks);
+
+router.get("/all", userController.users_all_get);
+
 module.exports = router;

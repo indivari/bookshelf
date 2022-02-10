@@ -1,6 +1,8 @@
 const mongoose = require("mongoose"),
   Admin = mongoose.mongo.Admin;
-const setupUserSchema = require("./user.schema");
+const initUserSchema = require("./user.schema");
+const initLocSchema = require("./location.schema");
+const initBookSchema = require("./book.schema");
 const userModel = require("../model/users");
 
 //mongoDB Class
@@ -23,6 +25,8 @@ class MongoDB {
   }
 }
 
-setupUserSchema.initialiseUserSchema();
+initUserSchema.initialiseUserSchema();
+initLocSchema.initialiseLocationSchema();
+initBookSchema.initialiseBookSchema();
 
 module.exports = MongoDB;
