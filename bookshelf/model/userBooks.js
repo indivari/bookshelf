@@ -20,4 +20,14 @@ async function borrowBook({ bookId, userId }) {
   ).exec();
 }
 
-module.exports = { borrowBook };
+async function list_userBooks({ userId }) {
+  console.log("userId", userId);
+  const result = await UserBooksModel.find({
+    user_id: userId,
+    return_date: undefined,
+  }).exec();
+  console.log("list of userbooks", result);
+  return result;
+}
+
+module.exports = { borrowBook, list_userBooks, UserBooksModel };

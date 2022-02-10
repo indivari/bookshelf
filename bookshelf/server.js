@@ -11,6 +11,7 @@ const mongo = new MongoDB();
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const booksRouter = require("./routes/books");
+const userBooksRouter = require("./routes/userBooks");
 const locationsRouter = require("./routes/locations");
 
 //create the express app object
