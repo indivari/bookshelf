@@ -11,6 +11,7 @@ import axios from "axios";
 import { useState } from "react";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
+import { UserContext } from "../UserContext";
 
 const style = {
   position: "absolute",
@@ -40,8 +41,10 @@ function ChildModal(props) {
   const [publishedDate, setPublishDate] = useState("");
   const [maturityRating, setMaturityRating] = useState("");
   const [description, setDescription] = useState("");
-  const [availability, setAvailability] = useState("In Stock");
+  const [availability, setAvailability] = useState("available");
   const [bookCover, setBookCover] = useState("");
+  const { bookStore, setBookStore } = React.useContext(UserContext);
+
   const handleOpen = async (e) => {
     // https://www.googleapis.com/books/v1/volumes?q=intitle:flowers+inauthor:keyes&key=AIzaSyDmkfSjnnPP6Zl7m0MkrTDQZEjOP0g8y4A&maxResults=1
     e.preventDefault();
@@ -74,26 +77,26 @@ function ChildModal(props) {
   const handleDonate = async (e) => {
     e.preventDefault();
 
-    await axios
-      .post("./books/donate", {
-        volumeInfo: {
-          title: donateTitle,
-          authors: [donateAuthor],
-          categories: [category],
-          subtitle: subtitle,
-          averageRating: rating,
-          publishedDate: publishedDate,
-          maturityRating: maturityRating,
-          description: description,
-          availability: availability,
-          imageLinks: {
-            thumbnail: bookCover,
-          },
+    const newBook = {
+      volumeInfo: {
+        title: donateTitle,
+        authors: [donateAuthor],
+        categories: [category],
+        subtitle: subtitle,
+        averageRating: rating,
+        publishedDate: publishedDate,
+        maturityRating: maturityRating,
+        description: description,
+        availability: availability,
+        imageLinks: {
+          thumbnail: bookCover,
         },
-      })
-      .then((res) => {
-        console.log(res);
-      });
+      },
+    };
+    await axios.post("./books/donate", newBook).then(() => {
+      setBookStore([newBook, ...bookStore]);
+      handleClose();
+    });
   };
 
   return (
