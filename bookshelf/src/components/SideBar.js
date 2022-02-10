@@ -1,8 +1,5 @@
 import React from "react";
-
 import BookCard from "./BookCard";
-import SearchBar from "./SearchBar";
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -116,6 +113,16 @@ function Sidebar() {
     }
   }, [userContext]);
 
+  const filteredBooks = bookData
+    .filter((data) =>
+      data?.volumeInfo.title
+        .toLowerCase()
+        .includes(searchInput.toLocaleLowerCase())
+    )
+    .map((data, id) => {
+      return <BookCard key={id} bookData={data} />;
+    });
+
   const books = bookData
     .map((data) => {
       data["isInBorrow"] =
@@ -132,8 +139,45 @@ function Sidebar() {
 
   return (
     <div>
-      <SearchBar />
-      <UserBooksInfo />
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar
+          position="static"
+          style={{
+            background: "#f1f5ff",
+            height: 60,
+            color: "black",
+            paddingBottom: 5,
+            marginBottom: 5,
+          }}
+        >
+          <Toolbar>
+            <Typography
+              variant="h7"
+              noWrap
+              component="div"
+              sx={{ display: { xs: "none", sm: "block" } }}
+            >
+              Search library
+            </Typography>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                onChange={handleSearchInput}
+                placeholder="Book title…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+
+            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+              <DonateBookModal />
+            </Box>
+            <Box sx={{ display: { xs: "flex", md: "none" } }}></Box>
+          </Toolbar>
+        </AppBar>
+      </Box>
       <Box
         sx={{ flexGrow: 1, minWidth: 450, maxHeight: "80vh", overflow: "auto" }}
       >
