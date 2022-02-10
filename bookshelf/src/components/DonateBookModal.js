@@ -91,8 +91,8 @@ function ChildModal(props) {
           },
         },
       })
-      .then(() => {
-        handleClose();
+      .then((res) => {
+        console.log(res);
       });
   };
 
