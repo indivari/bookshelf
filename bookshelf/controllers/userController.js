@@ -6,6 +6,13 @@ exports.user_list_get = function (req, res) {
   //   res.send("User List");
 };
 
+//GET all users
+exports.users_all_get = async function (req, res) {
+  const result = await users.get_all_users();
+  res.send(result, 201);
+  //   res.send("User List");
+};
+
 //GET a user
 exports.user_details_get = async function (req, res) {
   console.log(req.query);

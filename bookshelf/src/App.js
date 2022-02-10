@@ -19,10 +19,11 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 export default function App() {
-  const [userInfo, setUserInfo] = useState();
+  const [userInfo, setUserInfo] = useState(); // creating a state for storing info what we're gonna use in our context
 
   return (
     <div className="App">
+      {/* Provider , providing all context values to any component that will need them. */}
       <UserContext.Provider value={{ userInfo, setUserInfo }}>
         <Box
           sx={{

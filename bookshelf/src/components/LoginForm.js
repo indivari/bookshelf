@@ -21,6 +21,8 @@ export default function LoginForm() {
         const info = res.data?.user;
         setIsUserLoggedIn(true);
         setUserInfo(info?.fullname);
+
+        // consuming the context  values to set userInfo
         userContext.setUserInfo(info);
       })
       .catch(setIsUserLoggedIn(false));
