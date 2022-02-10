@@ -21,6 +21,23 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function App() {
   const [userInfo, setUserInfo] = useState(); // creating a state for storing info what we're gonna use in our context
 
+  React.useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    const fullname = localStorage.getItem("fullname");
+    if (userId) {
+      setUserInfo({ _id: userId, fullname });
+      console.log(`fullname is`, fullname);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (userInfo) {
+      localStorage.setItem("userId", userInfo._id);
+      localStorage.setItem("fullname", userInfo.fullname);
+      console.log(userInfo);
+    }
+  }, [userInfo]);
+
   return (
     <div className="App">
       {/* Provider , providing all context values to any component that will need them. */}

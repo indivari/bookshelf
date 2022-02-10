@@ -27,6 +27,10 @@ export default function BookCard({ bookData, isBorrowedByUser }) {
     setBorrowed(true);
   };
 
+  const handleReturnAction = () => {
+    setBorrowed(false);
+  };
+
   return (
     <Grid item xs={6} md={4} lg={3}>
       <Item>
@@ -56,6 +60,8 @@ export default function BookCard({ bookData, isBorrowedByUser }) {
             <BookCardDetailModal
               bookData={bookData}
               onBorrow={handleBorrowAction}
+              onReturn={handleReturnAction}
+              borrowed={borrowed}
             />
 
             {/* <Button size="small">Learn More</Button> */}

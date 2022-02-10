@@ -3,13 +3,13 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { Container } from "@mui/material";
+
 import FormControl from "@mui/material/FormControl";
 import CardMedia from "@mui/material/CardMedia";
+
 import TextField from "@mui/material/TextField";
 import axios from "axios";
 import { UserContext } from "../UserContext";
-import CancelIcon from "@mui/icons-material/Cancel";
 
 const style = {
   position: "absolute",
@@ -17,7 +17,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 600,
-  height: 850,
+  height: 530,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -27,7 +27,12 @@ const style = {
 // booke title with author: https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyDmkfSjnnPP6Zl7m0MkrTDQZEjOP0g8y4A
 //book title only search : https://www.googleapis.com/books/v1/volumes?q=flowers&key=AIzaSyDmkfSjnnPP6Zl7m0MkrTDQZEjOP0g8y4A
 
-export default function BookCardDetailModal({ bookData, onBorrow }) {
+export default function BookCardDetailModal({
+  bookData,
+  onBorrow,
+  onReturn,
+  borrowed,
+}) {
   const { volumeInfo, status, _id } = bookData;
   const [open, setOpen] = React.useState(false);
 
@@ -48,6 +53,20 @@ export default function BookCardDetailModal({ bookData, onBorrow }) {
         if (onBorrow) {
           onBorrow();
         }
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setOpen(false));
+  };
+  const handleReturnClick = () => {
+    axios
+      .put("/books/return", { bookId: _id, userId: userContext.userInfo?._id })
+      .then((res) => {
+        bookData.status = "available";
+        bookData["isInBorrow"] = false;
+        onReturn();
+        // if (onBorrow) {
+        //   onBorrow();
+        // }
       })
       .catch((err) => console.log(err))
       .finally(() => setOpen(false));
@@ -77,27 +96,7 @@ export default function BookCardDetailModal({ bookData, onBorrow }) {
                 mt: 4,
               }}
             >
-              <Box position="absolute" top="-5%" left="60%">
-                <Container>
-                  <CardMedia
-                    component="img"
-                    alt="Book Card"
-                    sx={{ width: 160 }}
-                    image={volumeInfo?.imageLinks.thumbnail}
-                  />
-                </Container>
-              </Box>
               <TextField
-                sx={{ marginTop: 30 }}
-                id="outlined-read-only-input"
-                label="Title"
-                defaultValue={volumeInfo?.title}
-                InputProps={{
-                  readOnly: true,
-                }}
-              />
-              <TextField
-                sx={{ marginTop: 30 }}
                 id="outlined-read-only-input"
                 label="Title"
                 defaultValue={volumeInfo?.title}
@@ -172,56 +171,33 @@ export default function BookCardDetailModal({ bookData, onBorrow }) {
                   readOnly: true,
                 }}
               />
+              {!!borrowed ? (
+                <Button
+                  variant="contained"
+                  // style={{ background: "#ffa722", color: "white" }}
+                  onClick={handleReturnClick}
+                >
+                  Return
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  // style={{ background: "#ffa722", color: "white" }}
+                  onClick={handleBorrowClick}
+                  disabled={!enableBorrow}
+                >
+                  {!!userContext.userInfo ? "Borrow" : "Please login to borrow"}
+                </Button>
+              )}
 
-              <Button
-                style={{
-                  background: "#ffa722",
-                  color: "white",
-                  marginTop: 10,
-                  marginLeft: 30,
-                  fontSize: 13,
-                  width: 150,
-                  height: 50,
-                }}
-                variant="contained"
-                // style={{ background: "#ffa722", color: "white" }}
-                onClick={handleBorrowClick}
-                disabled={!enableBorrow}
-              >
-                {!!userContext.userInfo ? "Borrow" : "Please login to borrow"}
-              </Button>
-
-              <Button
-                onClick={handleClose}
-                endIcon={<CancelIcon />}
-                style={{
-                  background: "#ffa722",
-                  color: "white",
-                  marginTop: 10,
-                  marginLeft: 5,
-                  fontSize: 13,
-                  width: 150,
-                  height: 50,
-                }}
-              >
-                Return
-              </Button>
-
-              <Button
-                onClick={handleClose}
-                endIcon={<CancelIcon />}
-                style={{
-                  background: "#ffa722",
-                  color: "white",
-                  marginTop: 10,
-                  marginLeft: 5,
-                  fontSize: 13,
-                  width: 150,
-                  height: 50,
-                }}
-              >
-                Close
-              </Button>
+              {/* <Box>
+                <CardMedia
+                  component="img"
+                  alt="Book Card"
+                  sx={{ width: 150 }}
+                  image="https://books.google.com/books/content?id=8Pr_kLFxciYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+                />
+              </Box> */}
             </FormControl>
           </Box>
         </Box>
