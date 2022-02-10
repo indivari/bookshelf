@@ -3,10 +3,9 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-
+import { Container } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import CardMedia from "@mui/material/CardMedia";
-
 import TextField from "@mui/material/TextField";
 import axios from "axios";
 import { UserContext } from "../UserContext";
@@ -17,7 +16,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 600,
-  height: 530,
+  height: 750,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -77,7 +76,18 @@ export default function BookCardDetailModal({ bookData, onBorrow }) {
                 mt: 4,
               }}
             >
+              <Box position="absolute" top="-5%" left="60%">
+                <Container>
+                  <CardMedia
+                    component="img"
+                    alt="Book Card"
+                    sx={{ width: 160 }}
+                    image={volumeInfo?.imageLinks.thumbnail}
+                  />
+                </Container>
+              </Box>
               <TextField
+                sx={{ marginTop: 30 }}
                 id="outlined-read-only-input"
                 label="Title"
                 defaultValue={volumeInfo?.title}
@@ -86,6 +96,7 @@ export default function BookCardDetailModal({ bookData, onBorrow }) {
                 }}
               />
               <TextField
+                sx={{ marginTop: 30 }}
                 id="outlined-read-only-input"
                 label="Author"
                 defaultValue={volumeInfo?.authors}
