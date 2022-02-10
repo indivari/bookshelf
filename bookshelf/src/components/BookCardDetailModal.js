@@ -27,9 +27,10 @@ const style = {
 // booke title with author: https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyDmkfSjnnPP6Zl7m0MkrTDQZEjOP0g8y4A
 //book title only search : https://www.googleapis.com/books/v1/volumes?q=flowers&key=AIzaSyDmkfSjnnPP6Zl7m0MkrTDQZEjOP0g8y4A
 
-export default function BookCardDetailModal({ bookData }) {
+export default function BookCardDetailModal({ bookData, onBorrow }) {
   const { volumeInfo, status, _id } = bookData;
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -40,11 +41,16 @@ export default function BookCardDetailModal({ bookData }) {
 
   const handleBorrowClick = () => {
     axios
-
-      // using the context values which is userInfo wherever you want them
       .post("/books/borrow", { bookId: _id, userId: userContext.userInfo?._id })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        bookData.status = "unavailable";
+        bookData["isInBorrow"] = true;
+        if (onBorrow) {
+          onBorrow();
+        }
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setOpen(false));
   };
 
   const enableBorrow =

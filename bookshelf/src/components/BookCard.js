@@ -16,8 +16,17 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function BookCard({ bookData }) {
+export default function BookCard({ bookData, isBorrowedByUser }) {
+  const [borrowed, setBorrowed] = React.useState(false);
   const { volumeInfo } = bookData;
+
+  React.useEffect(() => setBorrowed(isBorrowedByUser), [isBorrowedByUser]);
+
+  const handleBorrowAction = () => {
+    console.log("on borrow");
+    setBorrowed(true);
+  };
+
   return (
     <Grid item xs={6} md={4} lg={3}>
       <Item>
@@ -36,9 +45,18 @@ export default function BookCard({ bookData }) {
             <Typography variant="body3" color="text.secondary">
               By {volumeInfo?.authors[0]}
             </Typography>
+
+            {borrowed ? (
+              <Typography gutterBottom variant="h7" component="div">
+                <b>BORROWED</b>
+              </Typography>
+            ) : null}
           </CardContent>
           <CardActions>
-            <BookCardDetailModal bookData={bookData} />
+            <BookCardDetailModal
+              bookData={bookData}
+              onBorrow={handleBorrowAction}
+            />
 
             {/* <Button size="small">Learn More</Button> */}
           </CardActions>
