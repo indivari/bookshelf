@@ -6,6 +6,7 @@ import Logout from "@mui/icons-material/Logout";
 import Login from "@mui/icons-material/Login";
 import axios from "axios";
 import { UserContext } from "../UserContext";
+import Typography from "@mui/material/Typography";
 
 export default function LoginForm() {
   const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(false);
@@ -50,8 +51,16 @@ export default function LoginForm() {
               color: "black",
               display: "inline-block",
               margin: "0 20px",
-              fontWeight: "bold",
+              fontWeight: "bolder",
               fontSize: "1.2em",
+              color: "grey",
+              marginLeft: 5,
+              backgroundColor: "white",
+              padding: 8,
+              fontWeight: "bolder",
+              borderRadius: 10,
+              boxShadow: 5,
+              border: 1,
             }}
           >
             Welcome {userName}
@@ -64,6 +73,10 @@ export default function LoginForm() {
               onChange={(e) => setUserEmail(e.target.value)}
               label="Email"
               size="small"
+              style={{
+                margin: 10,
+                marginTop: 13,
+              }}
             />
 
             <TextField
@@ -73,6 +86,11 @@ export default function LoginForm() {
               type="password"
               autoComplete="current-password"
               size="small"
+              marginTop="13"
+              style={{
+                margin: 10,
+                marginTop: 13,
+              }}
             />
           </>
         )}
@@ -89,7 +107,12 @@ export default function LoginForm() {
           <Button
             onClick={handleLoginClick}
             endIcon={<Login />}
-            style={{ background: "#ffa722", color: "white", margin: 10 }}
+            style={{
+              background: "#ffa722",
+              color: "white",
+              margin: 10,
+              marginTop: 15,
+            }}
           >
             Login
           </Button>

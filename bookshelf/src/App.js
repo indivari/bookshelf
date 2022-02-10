@@ -19,7 +19,9 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 export default function App() {
-  const [userInfo, setUserInfo] = useState(); // creating a state for storing info what we're gonna use in our context
+  const [userInfo, setUserInfo] = useState();
+  const [bookStore, setBookStore] = useState([]);
+  // creating a state for storing info what we're gonna use in our context
 
   React.useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -41,7 +43,9 @@ export default function App() {
   return (
     <div className="App">
       {/* Provider , providing all context values to any component that will need them. */}
-      <UserContext.Provider value={{ userInfo, setUserInfo }}>
+      <UserContext.Provider
+        value={{ userInfo, setUserInfo, bookStore, setBookStore }}
+      >
         <Box
           sx={{
             flexGrow: 1,
@@ -68,8 +72,13 @@ export default function App() {
                 <GoogleMapsComponent />
               </Item>
             </Grid>
-            <Grid item xs={12} pr={1}>
-              <Item> Footer xs=12</Item>
+            <Grid
+              container
+              direction="row"
+              justifyContent="center"
+              alignItems="flex-end"
+            >
+              <Item>&copy; 2022 Group Project at GA</Item>
             </Grid>
           </Grid>
         </Box>

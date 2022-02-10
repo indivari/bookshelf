@@ -17,6 +17,7 @@ import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import DonateBookModal from "./DonateBookModal";
 import UserBooksInfo from "../UserBooksInfo";
 import { UserContext } from "./../UserContext";
+import { useContext } from "react";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -67,16 +68,21 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function Sidebar() {
-  const [bookData, setBookData] = useState([]);
+  // const [bookData, setBookData] = useState([]);
   const [userBooks, setUserBooks] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const { userInfo, setUserInfo, bookStore, setBookStore } =
+    useContext(UserContext);
 
   useEffect(() => {
     axios
       .get("./books/list")
       .then((res) => {
-        setBookData(res.data);
+        // setBookData(res.data);
+        setBookStore(res.data);
         // console.log(bookData.length);
+        // console.log(bookData);
+        // console.log(bookStore);
         // setCounter((counter += 1));
         // console.log(bookData);
       })
@@ -85,37 +91,35 @@ function Sidebar() {
       });
   }, []);
 
-  const userContext = React.useContext(UserContext);
-
   useEffect(() => {
-    if (!!userContext.userInfo) {
+    if (!!userInfo) {
       axios
         .get("/users/userBooks", {
-          params: { userId: userContext.userInfo?._id },
+          params: { userId: userInfo?._id },
         })
         .then((res) => setUserBooks(res.data))
         .catch((err) => console.log(err));
     } else {
       setUserBooks([]);
     }
-  }, [userContext]);
+  }, []);
 
   const handleSearchInput = (e) => {
     setSearchInput(e.target.value);
   };
 
   useEffect(() => {
-    if (!!userContext.userInfo) {
+    if (!!userInfo) {
       axios
         .get("/users/userBooks", {
-          params: { userId: userContext.userInfo?._id },
+          params: { userId: userInfo?._id },
         })
         .then((res) => setUserBooks(res.data))
         .catch((err) => console.log(err));
     }
-  }, [userContext]);
+  }, []);
 
-  const filteredBooks = bookData
+  const filteredBooks = bookStore
     .filter((data) =>
       data?.volumeInfo.title
         .toLowerCase()
@@ -125,7 +129,7 @@ function Sidebar() {
       return <BookCard key={id} bookData={data} />;
     });
 
-  const books = bookData
+  const books = bookStore
     .map((data) => {
       data["isInBorrow"] =
         userBooks &&

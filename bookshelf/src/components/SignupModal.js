@@ -51,7 +51,12 @@ export default function SignupModal() {
     <div>
       <Button
         endIcon={<RegIcon />}
-        style={{ background: "#ffa722", color: "white", margin: 8 }}
+        style={{
+          background: "#ffa722",
+          color: "white",
+          margin: 8,
+          marginTop: 13,
+        }}
         onClick={handleOpen}
       >
         Sign up
