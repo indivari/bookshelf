@@ -20,6 +20,22 @@ async function borrowBook({ bookId, userId }) {
   ).exec();
 }
 
+async function returnBook({ bookId, userId }) {
+  console.log("user and book" + userId + bookId);
+  const result = await UserBooksModel.updateOne(
+    {
+      user_id: userId,
+      book_id: bookId,
+    },
+    { return_date: new Date() }
+  ).exec();
+
+  return await BookModel.updateOne(
+    { _id: bookId },
+    { status: "available" }
+  ).exec();
+}
+
 async function list_userBooks({ userId }) {
   console.log("userId", userId);
   const result = await UserBooksModel.find({
@@ -30,4 +46,4 @@ async function list_userBooks({ userId }) {
   return result;
 }
 
-module.exports = { borrowBook, list_userBooks, UserBooksModel };
+module.exports = { borrowBook, list_userBooks, returnBook, UserBooksModel };

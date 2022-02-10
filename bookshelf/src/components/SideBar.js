@@ -44,6 +44,8 @@ function Sidebar() {
         })
         .then((res) => setUserBooks(res.data))
         .catch((err) => console.log(err));
+    } else {
+      setUserBooks([]);
     }
   }, [userContext]);
 

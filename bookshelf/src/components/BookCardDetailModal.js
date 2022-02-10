@@ -27,7 +27,12 @@ const style = {
 // booke title with author: https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyDmkfSjnnPP6Zl7m0MkrTDQZEjOP0g8y4A
 //book title only search : https://www.googleapis.com/books/v1/volumes?q=flowers&key=AIzaSyDmkfSjnnPP6Zl7m0MkrTDQZEjOP0g8y4A
 
-export default function BookCardDetailModal({ bookData, onBorrow }) {
+export default function BookCardDetailModal({
+  bookData,
+  onBorrow,
+  onReturn,
+  borrowed,
+}) {
   const { volumeInfo, status, _id } = bookData;
   const [open, setOpen] = React.useState(false);
 
@@ -48,6 +53,20 @@ export default function BookCardDetailModal({ bookData, onBorrow }) {
         if (onBorrow) {
           onBorrow();
         }
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setOpen(false));
+  };
+  const handleReturnClick = () => {
+    axios
+      .put("/books/return", { bookId: _id, userId: userContext.userInfo?._id })
+      .then((res) => {
+        bookData.status = "available";
+        bookData["isInBorrow"] = false;
+        onReturn();
+        // if (onBorrow) {
+        //   onBorrow();
+        // }
       })
       .catch((err) => console.log(err))
       .finally(() => setOpen(false));
@@ -152,15 +171,24 @@ export default function BookCardDetailModal({ bookData, onBorrow }) {
                   readOnly: true,
                 }}
               />
-
-              <Button
-                variant="contained"
-                // style={{ background: "#ffa722", color: "white" }}
-                onClick={handleBorrowClick}
-                disabled={!enableBorrow}
-              >
-                {!!userContext.userInfo ? "Borrow" : "Please login to borrow"}
-              </Button>
+              {!!borrowed ? (
+                <Button
+                  variant="contained"
+                  // style={{ background: "#ffa722", color: "white" }}
+                  onClick={handleReturnClick}
+                >
+                  Return
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  // style={{ background: "#ffa722", color: "white" }}
+                  onClick={handleBorrowClick}
+                  disabled={!enableBorrow}
+                >
+                  {!!userContext.userInfo ? "Borrow" : "Please login to borrow"}
+                </Button>
+              )}
 
               {/* <Box>
                 <CardMedia
