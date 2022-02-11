@@ -2,6 +2,7 @@ const locations = require("../model/locations");
 
 //get all books within lat lng range
 exports.books_list_get = async function (req, res) {
+  res.set("Access-Control-Allow-Origin", "*");
   console.log(req.query);
   const result = await locations.get_all_books_in_map(req.query);
   res.send(result, 201);
@@ -18,7 +19,7 @@ exports.location_details_get = function () {
 exports.markers_get = async function (req, res) {
   console.log(req.query);
   const result = await locations.get_visible_locations(req.query);
-  if (result.success) res.send(result);
+  if (result) res.send(result);
   else res.send(result, 401);
 };
 

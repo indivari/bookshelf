@@ -7,10 +7,10 @@ const Location = mongoose.model("locations", locSchema.locationsSchema);
 const Books = mongoose.model("books", bookSchema.bookSchema);
 
 async function get_all_books_in_map(query) {
-  let lattop = mongoose.Types.Decimal128(query.lattop);
-  let latbottom = mongoose.Types.Decimal128(query.latbottom);
-  let lngtop = mongoose.Types.Decimal128(query.lngtop);
-  let lngbottom = mongoose.Types.Decimal128(query.lngbottom);
+  let lattop = query.lattop;
+  let latbottom = query.latbottom;
+  let lngtop = query.lngtop;
+  let lngbottom = query.lngbottom;
   console.log(lattop);
   return await Books.find({
     $and: [{ "latlng.lat": { $lt: lattop } }, { "latlng.lat": { $gt: latbottom } }, { "latlng.lng": { $lt: lngtop } }, { "latlng.lng": { $gt: lngbottom } }],
@@ -18,10 +18,10 @@ async function get_all_books_in_map(query) {
 }
 
 async function get_visible_locations(query) {
-  let lattop = mongoose.Types.Decimal128(query.lattop);
-  let latbottom = mongoose.Types.Decimal128(query.latbottom);
-  let lngtop = mongoose.Types.Decimal128(query.lngtop);
-  let lngbottom = mongoose.Types.Decimal128(query.lngbottom);
+  let lattop = query.lattop;
+  let latbottom = query.latbottom;
+  let lngtop = query.lngtop;
+  let lngbottom = query.lngbottom;
   console.log(lattop);
   return await Location.find({
     $and: [{ "latlng.lat": { $lt: lattop } }, { "latlng.lat": { $gt: latbottom } }, { "latlng.lng": { $lt: lngtop } }, { "latlng.lng": { $gt: lngbottom } }],
