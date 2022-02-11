@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import RegIcon from "@mui/icons-material/HowToReg";
 import FormControl from "@mui/material/FormControl";
-// import OutlinedInput from "@mui/material/OutlinedInput";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import axios from "axios";
