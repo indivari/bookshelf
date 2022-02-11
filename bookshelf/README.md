@@ -19,36 +19,6 @@
 
 ## User stories (Trello Board)
 
-Users can DONATE books
--- Enter books title
--- API gives a list of suggestions
--- Choose the book you are going to donate
--- Record added to the database
--- Type in address where the book can be found. (Home or Cafe)
--- Location stored as Lat / Lng as well.
-
-Users SIGNUP and LOG-IN 
-
-Users can SEARCH for books
--- By title 
--- By authors
--- Display the search result in form of book cards
-
-Users can RESERVE / BORROW books
- 
-Users can SEARCH for books.
- -- Click "MORE" to view details and "RESERVE the book
- -- Click "BORROWED" when actually collecting the book.
-
-Users can RETURN books
--- Login to user profile
--- Choose the book to return
--- Add location where book is returned
--- Click return
-
-DISPLAY book of the month / random book
-
-MOVE the map and LOAD search books on the sidebar as you move the map.
 
 ### Trello Screenshot
 ![Screenshot](trello1.png)
