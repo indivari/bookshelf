@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import "./App.css";
-
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
-import GoogleMapsComponent from "./GoogleMapsComponent";
+import Map from "./GoogleMapsComponent";
 import { UserContext } from "./UserContext";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -43,9 +42,7 @@ export default function App() {
   return (
     <div className="App">
       {/* Provider , providing all context values to any component that will need them. */}
-      <UserContext.Provider
-        value={{ userInfo, setUserInfo, bookStore, setBookStore }}
-      >
+      <UserContext.Provider value={{ userInfo, setUserInfo, bookStore, setBookStore }}>
         <Box
           sx={{
             flexGrow: 1,
@@ -69,15 +66,11 @@ export default function App() {
             </Grid>
             <Grid item xs={8} pr={1}>
               <Item>
-                <GoogleMapsComponent />
+                {" "}
+                <Map />
               </Item>
             </Grid>
-            <Grid
-              container
-              direction="row"
-              justifyContent="center"
-              alignItems="flex-end"
-            >
+            <Grid container direction="row" justifyContent="center" alignItems="flex-end">
               <Item>&copy; 2022 Group Project at GA</Item>
             </Grid>
           </Grid>
