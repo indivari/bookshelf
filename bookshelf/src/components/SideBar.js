@@ -12,10 +12,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import { Button } from "@mui/material";
-import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import DonateBookModal from "./DonateBookModal";
-import UserBooksInfo from "../UserBooksInfo";
 import { UserContext } from "./../UserContext";
 import { useContext } from "react";
 
@@ -117,7 +114,7 @@ function Sidebar() {
         .then((res) => setUserBooks(res.data))
         .catch((err) => console.log(err));
     }
-  }, []);
+  }, [userInfo]);
 
   const filteredBooks = bookStore
     .filter((data) =>
@@ -128,14 +125,18 @@ function Sidebar() {
     .map((data, id) => {
       return <BookCard key={id} bookData={data} />;
     });
-
+  console.log(bookStore);
+  console.log(userBooks);
   const books = bookStore
+
     .map((data) => {
       data["isInBorrow"] =
         userBooks &&
         userBooks.find((ub) => ub.book_id === data._id) !== undefined;
+
       return data;
     })
+
     .sort((b1, b2) => b2.isInBorrow - b1.isInBorrow)
     .map((data, id) => {
       return (

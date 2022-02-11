@@ -188,11 +188,11 @@ export default function BookCardDetailModal({
               {!!borrowed ? (
                 <Button
                   variant="contained"
-                  style={{
-                    background: "#ffa722",
-                    color: "white",
-                    fontSize: 16,
-                  }}
+                  // style={{
+                  //   background: "#ffa722",
+                  //   color: "white",
+                  //   fontSize: 16,
+                  // }}
                   onClick={handleReturnClick}
                 >
                   Return
@@ -200,11 +200,13 @@ export default function BookCardDetailModal({
               ) : (
                 <Button
                   variant="contained"
-                  style={{
-                    background: "#ffa722",
-                    color: "white",
-                    fontSize: 16,
-                  }}
+                  style={
+                    {
+                      // background: "#ffa722",
+                      // color: "white",
+                      // fontSize: 16,
+                    }
+                  }
                   onClick={handleBorrowClick}
                   disabled={!enableBorrow}
                 >

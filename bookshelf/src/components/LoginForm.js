@@ -6,7 +6,6 @@ import Logout from "@mui/icons-material/Logout";
 import Login from "@mui/icons-material/Login";
 import axios from "axios";
 import { UserContext } from "../UserContext";
-import Typography from "@mui/material/Typography";
 
 export default function LoginForm() {
   const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(false);
@@ -48,10 +47,8 @@ export default function LoginForm() {
         {isUserLoggedIn ? (
           <div
             style={{
-              color: "black",
               display: "inline-block",
               margin: "0 20px",
-              fontWeight: "bolder",
               fontSize: "1.2em",
               color: "grey",
               marginLeft: 5,
@@ -60,7 +57,6 @@ export default function LoginForm() {
               fontWeight: "bolder",
               borderRadius: 10,
               boxShadow: 5,
-              border: 1,
             }}
           >
             Welcome {userName}
