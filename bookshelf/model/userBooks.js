@@ -26,6 +26,7 @@ async function returnBook({ bookId, userId }) {
     {
       user_id: userId,
       book_id: bookId,
+      return_date: undefined,
     },
     { return_date: new Date() }
   ).exec();
