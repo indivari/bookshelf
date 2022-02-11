@@ -28,7 +28,7 @@ export default function App() {
     const fullname = localStorage.getItem("fullname");
     if (userId) {
       setUserInfo({ _id: userId, fullname });
-      console.log(`fullname is`, fullname);
+      // console.log(`fullname is`, fullname);
     }
   }, []);
 
@@ -36,7 +36,7 @@ export default function App() {
     if (userInfo) {
       localStorage.setItem("userId", userInfo._id);
       localStorage.setItem("fullname", userInfo.fullname);
-      console.log(userInfo);
+      // console.log(userInfo);
     }
   }, [userInfo]);
 
