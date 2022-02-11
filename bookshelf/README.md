@@ -30,5 +30,5 @@
 
 
 ### ScreenShot
-![Screenshot](servo_ss.png)
+![Screenshot](bookshelf_ss.png)
 
