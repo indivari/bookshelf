@@ -29,11 +29,11 @@
 
 
 ## Database Schema
--in our mongoDB, we have 4 tables(collections) of: 
-1 - Books
-2 - users
-3 - userBooks
-4 - locations
+in our mongoDB, we have 4 tables(collections) of: 
+- Books
+- users
+- userBooks
+- locations
 
 ## Unsolved Problems and hurdles we had to overcome
 
@@ -41,6 +41,7 @@ For the major hurdles we had to overcome we can mention below points:
 - connecting our backend routes to the interface was one of the initial challenges.
 - to compartmentalise the front end components was another challenge especially when using mui for css framework.
 - implementing the borrow and return functionalities were challenging in terms of integration with database.
+- resolving git conflicts where we were working on the same features was also a hurdle we had to overcome.
 
 
 
