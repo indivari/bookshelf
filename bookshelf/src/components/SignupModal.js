@@ -42,6 +42,7 @@ export default function SignupModal() {
         address: address,
       })
       .then((res) => {
+        setOpen(false);
         console.log(res);
       });
   };

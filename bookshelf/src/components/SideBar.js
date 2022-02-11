@@ -125,8 +125,8 @@ function Sidebar() {
     .map((data, id) => {
       return <BookCard key={id} bookData={data} />;
     });
-  console.log(bookStore);
-  console.log(userBooks);
+  // console.log(bookStore);
+  // console.log(userBooks);
   const books = bookStore
 
     .map((data) => {
