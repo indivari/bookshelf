@@ -10,6 +10,9 @@
 - Clicking on each book card (detail) will open a new modal with books details with the options of Borrow or Return depending on books availability.
 - Google Maps show the location of street libraries, and book locations where users can borrow the books. 
 
+### Application ScreenShot
+![Screenshot](bookshelf_ss.png)
+
 ## Our general approach to the project and Wireframes
 
 ### wireframe screenshots
@@ -40,6 +43,4 @@ for the major hurdles we had to overcome we can mention below points:
 
 
 
-### Application ScreenShot
-![Screenshot](bookshelf_ss.png)
 
