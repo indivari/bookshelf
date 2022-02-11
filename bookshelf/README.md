@@ -29,6 +29,9 @@
 
 ## Unsolved Problems and hurdles we had to overcome
 
+for the major hurdles we had to overcome we can mention below points:
+- connecting our backend routes to the interface was one of the initial challenges.
+- to compartmentalise the front end components was another challenge especially when using mui for css framework.
 
 
 
