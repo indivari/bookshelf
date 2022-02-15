@@ -18,12 +18,6 @@ const locationsRouter = require("./routes/locations");
 //create the express app object
 const app = express();
 
-//postgres database
-// const { Pool, Client } = require("pg");
-// const pool = new Pool({
-//   database: "default",
-// });
-
 //connect to mongoDB
 mongo.connect();
 
